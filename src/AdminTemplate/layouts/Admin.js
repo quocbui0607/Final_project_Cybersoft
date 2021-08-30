@@ -5,7 +5,7 @@ import AdminNavbar from "../components/Navbars/AdminNavbar";
 import Footer from "../components/Footer/Footer";
 import Sidebar from "../components/Sidebar/Sidebar";
 
-import routes from "../routes.js";
+import routes from "../routesAdmin.js";
 
 import sidebarImage from "../assets/img/sidebar-3.jpg";
 

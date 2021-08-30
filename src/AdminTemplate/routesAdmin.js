@@ -1,8 +1,8 @@
 
-import Dashboard from "./views/Dashboard.js";
-import ManageUsers from "./views/ManageUsers.js";
-import ManageMovies from "./views/ManageMovies.js";
-import ManageTheaters from "./views/ManageTheaters.js";
+import Dashboard from "./views/Dashboard/Dashboard.js";
+import ManageUsers from "./views/ManageUsers/ManageUsers.js";
+import ManageMovies from "./views/ManageMovies/ManageMovies.js";
+import ManageTheaters from "./views/ManageTheaters/ManageTheaters.js";
 
 const dashboardRoutes = [
   {
@@ -22,14 +22,14 @@ const dashboardRoutes = [
   {
     path: "/manage-movies",
     name: "Manage Movies",
-    icon: "nc-icon nc-notes",
+    icon: "fas fa-film",
     component: ManageMovies,
     layout: "/admin",
   },
   {
     path: "/manage-theaters",
     name: "Manage Theaters",
-    icon: "nc-icon nc-atom",
+    icon: "fas fa-ticket-alt",
     component: ManageTheaters,
     layout: "/admin",
   },

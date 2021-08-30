@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { lazy, Suspense } from "react";
+import { Route, Switch } from "react-router";
+import AdminTemplate from "./AdminTemplate/AdminTemplate";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Switch>
+        <AdminTemplate></AdminTemplate>
+        <Route
+          path="/authentication"
+          component={lazy(() =>
+            import("./AdminTemplate/Authentication/Authentication")
+          )}
+        ></Route>
+        <Route
+          path=""
+          component={lazy(() => import("./PageNotFound/PageNotFound"))}
+        ></Route>
+      </Switch>
+    </Suspense>
   );
 }
 

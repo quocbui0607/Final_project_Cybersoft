@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-import { Container } from "react-bootstrap";
 
 class Footer extends Component {
   render() {
     return (
       <footer className="footer px-0 px-lg-3">
-        <Container fluid>
-          <nav>
-            <p className="copyright text-center">
-              © {new Date().getFullYear()}{" "}
-              <a href="#pablo">Regal Team</a>, made with
-              love for coding with ReactJS
-            </p>
-          </nav>
-        </Container>
+        <p className="copyright text-center my-0">
+          © {new Date().getFullYear()} <a href="#pablo">Regal Team</a>, made
+          with love for coding with ReactJS
+        </p>
       </footer>
     );
   }

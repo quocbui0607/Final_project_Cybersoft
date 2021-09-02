@@ -1,0 +1,14 @@
+table {
+  button {
+    min-width: 20px !important;
+    padding: 8px !important;
+    margin-right: 5px;
+    .MuiButton-startIcon,
+    .MuiButton-endIcon {
+      display: inherit;
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

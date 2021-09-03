@@ -2,7 +2,7 @@ import React from "react";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { makeStyles, alpha } from "@material-ui/core/styles";
-import ModalOpen from "../ModalActions/ModalOpen";
+import ModalOpen from "../ModalActions/ModalAdd";
 
 const useStyleSearchInput = makeStyles((theme) => ({
   search: {

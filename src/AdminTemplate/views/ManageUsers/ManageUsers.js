@@ -4,7 +4,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import ModalEditUser from "./ModalEditUser/ModalEditUser";
+
 
 const manageUserTableHeader = (
   <TableRow>
@@ -153,8 +154,10 @@ const rows = [
   ),
 ];
 
+
 function ManageUsers(props) {
   const [page, setPage] = React.useState(0);
+  
 
   const tableBodyContent = rows
     .slice(page * 10, page * 10 + 10)
@@ -171,12 +174,8 @@ function ManageUsers(props) {
           {row.maLoaiNguoiDung === "KhachHang" ? "Khách hàng" : "Quản trị viên"}
         </TableCell>
         <TableCell style={{ width: 80, padding: 13 }}>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginRight: "20px" }}
-            startIcon={<EditIcon />}
-          ></Button>
+          <ModalEditUser userInfo={row}></ModalEditUser>
+
           <Button
             variant="contained"
             color="secondary"

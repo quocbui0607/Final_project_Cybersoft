@@ -9,9 +9,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function AdminTemplate() {
   return (
-    <>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
-    </>
+    <Route
+      path="/admin"
+      render={(props) => {
+        if (localStorage.getItem("UserAdmin")) {
+          return <AdminLayout {...props} />;
+        }
+        return <Redirect to="/authentication"></Redirect>;
+      }}
+    />
   );
 }

@@ -1,10 +1,14 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
-
+import { withRouter } from "react-router";
 import routes from "../../routesAdmin";
+import { useDispatch } from "react-redux";
+import { actLogout } from "../../Authentication/modules/actions";
 
-function Header() {
+function Header(props) {
+  const dispatch = useDispatch()
+  const account = JSON.parse(localStorage.getItem('UserAdmin'))
   const location = useLocation();
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
@@ -58,14 +62,15 @@ function Header() {
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
               >
-                <span className="no-icon">Account</span>
+                <span className="no-icon">{account.taiKhoan}</span>
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link
                 className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
+                onClick={() => {
+                  dispatch(actLogout(props.history))
+                }}
               >
                 <span className="no-icon">Log out</span>
               </Nav.Link>
@@ -77,4 +82,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default withRouter(Header);

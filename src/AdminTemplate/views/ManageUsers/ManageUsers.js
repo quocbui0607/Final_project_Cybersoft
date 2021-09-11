@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomPaginationActionsTable from "../Table/Table";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ModalEditUser from "./ModalEditUser/ModalEditUser";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchListUsersAction } from "./modules/actions";
+import LoadingComponent from "../../../common/LoadingComponent/LoadingComponent";
 
 
 const manageUserTableHeader = (
   <TableRow>
-    <TableCell>ID</TableCell>
+    <TableCell>STT</TableCell>
     <TableCell>Tài khoản</TableCell>
     <TableCell>Họ Tên</TableCell>
     <TableCell>Email</TableCell>
@@ -23,141 +26,24 @@ function createData(id, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung) {
   return { id, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung };
 }
 
-const rows = [
-  createData(
-    1,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "QuanTri"
-  ),
-  createData(
-    2,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    3,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-  createData(
-    15,
-    "123@admin",
-    "Nguyễn Tân A",
-    "stringgsss@gmail.com",
-    "120000003467",
-    "KhachHang"
-  ),
-];
-
-
 function ManageUsers(props) {
   const [page, setPage] = React.useState(0);
-  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchListUsersAction())
+  }, [dispatch])
+
+  const loading = useSelector(state => state.ManageUsersReducer.loading)
+  const listUsers = useSelector(state => state.ManageUsersReducer.listUsers)
+  const rows = []
+  if(listUsers){
+    listUsers.forEach((user, index)=> {
+      const {taiKhoan, hoTen, email, soDt, maLoaiNguoiDung } = user
+      rows.push(createData(index + 1, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung ))
+    })
+  }
+
 
   const tableBodyContent = rows
     .slice(page * 10, page * 10 + 10)
@@ -184,6 +70,10 @@ function ManageUsers(props) {
         </TableCell>
       </TableRow>
     ));
+
+    if(loading){
+      return <LoadingComponent></LoadingComponent>
+    }
 
   return (
     <>

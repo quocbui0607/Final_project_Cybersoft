@@ -16,7 +16,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import ActionOnTable from "./ActionOnTable/ActionOnTable";
-
+import { TableCell } from "@material-ui/core";
 
 const useStylesTablePagnition = makeStyles((theme) => ({
   root: {
@@ -95,18 +95,15 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-
 const useStylesTable = makeStyles(() => ({
   table: {
     minWidth: 500,
   },
 }));
 
-
-
 export default function CustomPaginationActionsTable(props) {
   const customTableStyle = useStylesTable();
-  
+  const emptyRows = 10 - Math.min(10, props.rows.length - props.page * 10);
   const handleChangePage = (event, newPage) => {
     props.setPage(newPage);
   };
@@ -119,11 +116,14 @@ export default function CustomPaginationActionsTable(props) {
           className={customTableStyle.table}
           aria-label="custom pagination table"
         >
-          <TableHead>
-            {props.tableHeader}
-          </TableHead>
+          <TableHead>{props.tableHeader}</TableHead>
           <TableBody>
             {props.rowData}
+            {emptyRows > 0 && (
+              <TableRow style={{ height: 63 * emptyRows }}>
+                <TableCell colSpan={7} />
+              </TableRow>
+            )}
           </TableBody>
           <TableFooter>
             <TableRow>

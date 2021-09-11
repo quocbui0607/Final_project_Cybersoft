@@ -1,0 +1,6 @@
+export const GET_USERS_SUCCESS = '@GetUsers/SUCCESS'
+export const GET_USERS_FAILED = '@GetUsers/FAILED'
+export const GET_USERS_LOADING = '@GetUsers/LOADING'
+export const EDIT_USER_LOADING = '@EDIT_USER/LOADING'
+export const EDIT_USER_SUCCESS = '@EDIT_USER/SUCCESS'
+export const EDIT_USER_FAILED = '@EDIT_USER/FAILED'

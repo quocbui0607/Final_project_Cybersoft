@@ -4,6 +4,8 @@ import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import Modal from "@material-ui/core/Modal";
 import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { sendEditUserAction } from "../modules/actions";
 
 function getModalStyle() {
   const top = 50;
@@ -42,12 +44,16 @@ const useStyleEditButton = makeStyles((theme) => ({
 
 export default function ModalEditUser(props) {
   const { userInfo } = props;
+  const [editUser, setEditUser] = React.useState({
+    ...userInfo,
+  });
+
+  const dispatch = useDispatch();
   const editButtonStyle = useStyleEditButton();
   const modalOpenStyle = useStylesModal();
   const [modalStyle] = React.useState(getModalStyle);
 
   const [open, setOpen] = React.useState(false);
-  const [selectedDropDown, setDropdownValue] = React.useState(userInfo.maLoaiNguoiDung);
 
   const handleOpen = () => {
     setOpen(true);
@@ -57,11 +63,16 @@ export default function ModalEditUser(props) {
     setOpen(false);
   };
 
-  const handleSelect = (event) =>{
-    setDropdownValue(event)
-  }
+  const handleSelect = (event) => {
+    setEditUser({ ...editUser, maLoaiNguoiDung: event });
+  };
 
-  const ModalEditOnOpen = (userInfo) => {
+  const handleOnChange = (event) => {
+    const { name, value } = event.target;
+    setEditUser({ ...editUser, [name]: value });
+  };
+
+  const ModalEditOnOpen = (editUser) => {
     const modalAddUser = (
       <div>
         <div className="form-group">
@@ -69,8 +80,8 @@ export default function ModalEditUser(props) {
           <input
             type="text"
             className="form-control"
-            id="taiKhoan"
-            value={userInfo.taiKhoan}
+            name="taiKhoan"
+            value={editUser.taiKhoan}
             disabled
           />
         </div>
@@ -79,8 +90,9 @@ export default function ModalEditUser(props) {
           <input
             type="email"
             className="form-control"
-            id="email"
-            value={userInfo.email}
+            name="email"
+            value={editUser.email}
+            onChange={handleOnChange}
           />
         </div>
         <div className="form-group">
@@ -88,8 +100,9 @@ export default function ModalEditUser(props) {
           <input
             type="text"
             className="form-control"
-            id="soDt"
-            value={userInfo.soDt}
+            name="soDt"
+            value={editUser.soDt}
+            onChange={handleOnChange}
           />
         </div>
         <div className="form-group">
@@ -97,16 +110,22 @@ export default function ModalEditUser(props) {
           <input
             type="text"
             className="form-control"
-            id="hoTen"
-            value={userInfo.hoTen}
+            name="hoTen"
+            value={editUser.hoTen}
+            onChange={handleOnChange}
           />
         </div>
         <div className="form-group">
           <label>Mã loại người dùng</label>
           <DropdownButton
-            title={selectedDropDown === 'KhachHang' ? "Khách hàng" : "Quản trị viên"}
+            title={
+              editUser.maLoaiNguoiDung === "KhachHang"
+                ? "Khách hàng"
+                : "Quản trị viên"
+            }
             onSelect={handleSelect}
             variant="primary"
+            name="maLoaiNguoiDung"
           >
             <Dropdown.Item eventKey="KhachHang">Khách hàng</Dropdown.Item>
             <Dropdown.Item eventKey="QuanTri">Quản trị viên</Dropdown.Item>
@@ -119,7 +138,10 @@ export default function ModalEditUser(props) {
             color="primary"
             className={editButtonStyle.button}
             startIcon={<EditIcon></EditIcon>}
-            type="submit"
+            onClick={(e) => {
+              dispatch(sendEditUserAction(editUser));
+              setOpen(false);
+            }}
           >
             Cập nhật
           </Button>
@@ -147,11 +169,13 @@ export default function ModalEditUser(props) {
         color="primary"
         className={editButtonStyle.button}
         startIcon={<EditIcon></EditIcon>}
-        onClick={handleOpen}
+        onClick={() => handleOpen()}
       ></Button>
-      <Modal open={open} onClose={handleClose}>
-        {ModalEditOnOpen(userInfo)}
-      </Modal>
+      {open && (
+        <Modal open={open} onClose={() => handleClose()}>
+          {ModalEditOnOpen(editUser)}
+        </Modal>
+      )}
     </div>
   );
 }

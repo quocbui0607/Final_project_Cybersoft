@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles, alpha } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import EditIcon from "@material-ui/icons/Edit";
 import Modal from "@material-ui/core/Modal";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { sendEditUserAction } from "../modules/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { sendEditUser, sendEditUserAction } from "../modules/actions";
 
 function getModalStyle() {
   const top = 50;
@@ -42,11 +42,22 @@ const useStyleEditButton = makeStyles((theme) => ({
   },
 }));
 
-export default function ModalEditUser(props) {
-  const { userInfo } = props;
+function ModalEditUser(props) {
+  const editUserRedux = useSelector(
+    (state) => state.ManageUsersReducer.editUser
+  );
   const [editUser, setEditUser] = React.useState({
-    ...userInfo,
+    taiKhoan: "",
+    matKhau: "",
+    email: "",
+    soDt: "",
+    maLoaiNguoiDung: "",
+    hoTen: "",
   });
+
+  useEffect(() => {
+    setEditUser({ ...editUserRedux });
+  }, [editUserRedux]);
 
   const dispatch = useDispatch();
   const editButtonStyle = useStyleEditButton();
@@ -56,6 +67,8 @@ export default function ModalEditUser(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
+    dispatch(sendEditUser(props.userInfo));
+
     setOpen(true);
   };
 
@@ -81,7 +94,7 @@ export default function ModalEditUser(props) {
             type="text"
             className="form-control"
             name="taiKhoan"
-            value={editUser.taiKhoan}
+            value={editUser.taiKhoan ? editUser.taiKhoan : ""}
             disabled
           />
         </div>
@@ -91,7 +104,7 @@ export default function ModalEditUser(props) {
             type="email"
             className="form-control"
             name="email"
-            value={editUser.email}
+            value={editUser.email ? editUser.email : ""}
             onChange={handleOnChange}
           />
         </div>
@@ -101,7 +114,7 @@ export default function ModalEditUser(props) {
             type="text"
             className="form-control"
             name="soDt"
-            value={editUser.soDt}
+            value={editUser.soDt ? editUser.soDt : ""}
             onChange={handleOnChange}
           />
         </div>
@@ -111,7 +124,7 @@ export default function ModalEditUser(props) {
             type="text"
             className="form-control"
             name="hoTen"
-            value={editUser.hoTen}
+            value={editUser.hoTen ? editUser.hoTen : ""}
             onChange={handleOnChange}
           />
         </div>
@@ -138,7 +151,7 @@ export default function ModalEditUser(props) {
             color="primary"
             className={editButtonStyle.button}
             startIcon={<EditIcon></EditIcon>}
-            onClick={(e) => {
+            onClick={() => {
               dispatch(sendEditUserAction(editUser));
               setOpen(false);
             }}
@@ -179,3 +192,5 @@ export default function ModalEditUser(props) {
     </div>
   );
 }
+
+export default ModalEditUser;

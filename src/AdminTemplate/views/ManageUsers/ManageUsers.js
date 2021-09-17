@@ -2,13 +2,11 @@ import React, { useEffect } from "react";
 import CustomPaginationActionsTable from "../Table/Table";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
 import ModalEditUser from "./ModalEditUser/ModalEditUser";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListUsersAction } from "./modules/actions";
 import LoadingComponent from "../../../common/LoadingComponent/LoadingComponent";
-
+import ModalDeleteUser from "../Table/ModalDelete/ModalDelete";
 
 const manageUserTableHeader = (
   <TableRow>
@@ -22,8 +20,16 @@ const manageUserTableHeader = (
   </TableRow>
 );
 
-function createData(id, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung) {
-  return { id, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung };
+function createData(
+  id,
+  taiKhoan,
+  hoTen,
+  email,
+  soDt,
+  maLoaiNguoiDung,
+  matKhau
+) {
+  return { id, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung, matKhau };
 }
 
 function ManageUsers(props) {
@@ -31,19 +37,37 @@ function ManageUsers(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchListUsersAction())
-  }, [dispatch])
+    dispatch(fetchListUsersAction());
+  }, [dispatch]);
+  const loading = useSelector((state) => state.ManageUsersReducer.loading);
+  const listUsers = useSelector((state) => state.ManageUsersReducer.listUsers);
+  const keywords = useSelector((state) => state.ManageUsersReducer.keywords);
 
-  const loading = useSelector(state => state.ManageUsersReducer.loading)
-  const listUsers = useSelector(state => state.ManageUsersReducer.listUsers)
-  const rows = []
-  if(listUsers){
-    listUsers.forEach((user, index)=> {
-      const {taiKhoan, hoTen, email, soDt, maLoaiNguoiDung } = user
-      rows.push(createData(index + 1, taiKhoan, hoTen, email, soDt, maLoaiNguoiDung ))
-    })
+  let rows = [];
+  if (listUsers) {
+    listUsers.forEach((user, index) => {
+      const { taiKhoan, hoTen, email, soDt, maLoaiNguoiDung, matKhau } = user;
+      rows.push(
+        createData(
+          index + 1,
+          taiKhoan,
+          hoTen,
+          email,
+          soDt,
+          maLoaiNguoiDung,
+          matKhau
+        )
+      );
+    });
   }
 
+  const rowsBackUp = [...rows]
+
+  if(keywords){
+    rows = rows.filter(user => user.taiKhoan.indexOf(keywords) !== -1 )
+  } else {
+    rows = rowsBackUp
+  }
 
   const tableBodyContent = rows
     .slice(page * 10, page * 10 + 10)
@@ -60,21 +84,21 @@ function ManageUsers(props) {
           {row.maLoaiNguoiDung === "KhachHang" ? "Khách hàng" : "Quản trị viên"}
         </TableCell>
         <TableCell style={{ width: 80, padding: 13 }}>
-          <ModalEditUser userInfo={row}></ModalEditUser>
+          <div className='d-flex align-items-center justify-content-center'>
+            <ModalEditUser userInfo={row}></ModalEditUser>
 
-          <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<DeleteIcon />}
-          ></Button>
+            <ModalDeleteUser
+              rowData={row}
+              pageSelected="Manage Users"
+            ></ModalDeleteUser>
+          </div>
         </TableCell>
       </TableRow>
     ));
 
-    if(loading){
-      return <LoadingComponent></LoadingComponent>
-    }
-
+  if (loading) {
+    return <LoadingComponent></LoadingComponent>;
+  }
   return (
     <>
       <CustomPaginationActionsTable

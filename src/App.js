@@ -11,6 +11,7 @@ function App(props) {
 
   useEffect(() => {
     dispatch(actTryLogin(history));
+    // eslint-disable-next-line
   }, [dispatch]);
 
   return (

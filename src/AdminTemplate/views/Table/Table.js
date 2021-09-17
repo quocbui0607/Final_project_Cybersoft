@@ -17,6 +17,7 @@ import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
 import ActionOnTable from "./ActionOnTable/ActionOnTable";
 import { TableCell } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStylesTablePagnition = makeStyles((theme) => ({
   root: {
@@ -107,10 +108,21 @@ export default function CustomPaginationActionsTable(props) {
   const handleChangePage = (event, newPage) => {
     props.setPage(newPage);
   };
+  const error = useSelector((state) => state.ManageUsersReducer.error);
 
+  const renderNoti = () => {
+    if (error) {
+      return <div className="alert alert-danger">{error.response.data}</div>;
+    } else return null;
+  };
   return (
     <>
-      <ActionOnTable pageSelected={props.pageSelected}></ActionOnTable>
+      {renderNoti()}
+      <ActionOnTable
+        pageSelected={props.pageSelected}
+        rows={props.rows}
+        renderNoti={renderNoti}
+      ></ActionOnTable>
       <TableContainer component={Paper}>
         <Table
           className={customTableStyle.table}

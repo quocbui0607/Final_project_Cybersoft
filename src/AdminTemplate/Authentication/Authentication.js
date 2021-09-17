@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { actAuthLogin } from "./modules/actions";
 import LoadingComponent from "../../common/LoadingComponent/LoadingComponent"
+import { Redirect } from "react-router";
 
 export default function Authentication(props) {
   const [state, setState] = useState({ taiKhoan: "", matKhau: "" });
@@ -31,6 +32,10 @@ export default function Authentication(props) {
     if (error)
       return <div className="alert alert-danger">{error.response.data}</div>;
   };
+
+  if(localStorage.getItem("UserAdmin")){
+    return <Redirect to='/admin/dashboard'></Redirect>
+}
 
   if (loading) {
     return <LoadingComponent />;

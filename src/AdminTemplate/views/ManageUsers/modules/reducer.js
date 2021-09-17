@@ -1,7 +1,11 @@
 import {
+  ADD_USER_FAILED,
+  ADD_USER_SUCCESS,
+  DELETE_USER_FAILED,
+  EDIT_USER,
   EDIT_USER_FAILED,
   EDIT_USER_LOADING,
-  EDIT_USER_SUCCESS,
+  FIND_USER,
   GET_USERS_FAILED,
   GET_USERS_LOADING,
   GET_USERS_SUCCESS,
@@ -11,8 +15,10 @@ const initialState = {
   data: null,
   error: null,
   listUsers: null,
-  editUser: null,
   loading: false,
+  newUser: null,
+  keywords: "",
+  editUser: null
 };
 
 const ManageUsersReducer = (state = initialState, action) => {
@@ -24,6 +30,8 @@ const ManageUsersReducer = (state = initialState, action) => {
     case GET_USERS_SUCCESS: {
       state.loading = false;
       state.listUsers = action.payload;
+      state.newUser = null;
+      state.editUser = null
       state.error = null;
       return { ...state };
     }
@@ -39,18 +47,40 @@ const ManageUsersReducer = (state = initialState, action) => {
       return { ...state, loading: true };
     }
 
-    case EDIT_USER_SUCCESS: {
+    case EDIT_USER_FAILED: {
       state.loading = false;
-      state.editUser = action.payload;
+      state.error = action.payload;
+      return { ...state };
+    }
+
+    case DELETE_USER_FAILED: {
+      state.loading = false;
+      state.error = action.payload;
+      return { ...state };
+    }
+
+    case ADD_USER_FAILED: {
+      state.newUser = action.newUser
+      state.loading = false;
+      state.error = action.payload;
+      return { ...state };
+    }
+
+    case ADD_USER_SUCCESS: {
+      state.loading = false;
+      state.newUser = null;
       state.error = null;
       return { ...state };
     }
 
-    case EDIT_USER_FAILED: {
-      state.loading = false;
-      state.editUser = null;
-      state.error = action.payload;
+    case FIND_USER: {
+      state.keywords = action.payload
       return { ...state };
+    }
+
+    case EDIT_USER: {
+      state.editUser = action.payload
+      return {...state}
     }
 
     default:

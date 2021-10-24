@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CustomPaginationActionsTable from "../Table/Table";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
 import ModalEditMovie from "./ModalEditMovie/ModalEditMovie";
 import { fetchListMoviesAction } from "./modules/actions";
 import LoadingComponent from "../../../common/LoadingComponent/LoadingComponent";

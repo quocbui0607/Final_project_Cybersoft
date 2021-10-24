@@ -7,9 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   sendEditMovie,
   sendEditMovieAction,
-  sendUploadImageAction,
 } from "../modules/actions";
-import PublishIcon from "@material-ui/icons/Publish";
 import TextField from "@material-ui/core/TextField";
 import "./modalEditMovie.scss";
 

@@ -139,13 +139,3 @@ export const requestUploadImageFailAction = (data) => ({
   type: UPLOAD_IMG_FAILED,
   payload: data,
 });
-
-export const sendUploadImageAction = (file) => {
-  return (dispatch) => {
-    dispatch(showLoadingAction());
-    api
-      .post("QuanLyPhim/CapNhatPhimUpload", file)
-      .then((res) => dispatch(fetchListMoviesAction()))
-      .catch((err) => dispatch(requestUploadImageFailAction(err)));
-  };
-};

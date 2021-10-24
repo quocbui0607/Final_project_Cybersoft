@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CustomPaginationActionsTable from "../Table/Table";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ModalEditMovie from "./ModalEditMovie/ModalEditMovie";
+import { fetchListMoviesAction } from "./modules/actions";
+import LoadingComponent from "../../../common/LoadingComponent/LoadingComponent";
+import ModalDelete from "../Table/ModalDelete/ModalDelete";
 
 const manageMoviesTableHeader = (
   <TableRow>
@@ -27,6 +31,18 @@ function createData(
   ngayKhoiChieu,
   danhGia
 ) {
+  const dataDate = new Date(ngayKhoiChieu);
+  let date = dataDate.getDate()
+  let month = dataDate.getMonth() + 1
+  const year = dataDate.getFullYear()
+  if(date < 10) {
+    date = '0' + date.toString()
+  }
+  if(month < 10) {
+    month = '0' + month.toString()
+  }
+  const dateValue = `${year}-${month}-${date}`
+
   return {
     maPhim,
     tenPhim,
@@ -35,156 +51,85 @@ function createData(
     hinhAnh,
     moTa,
     maNhom,
-    ngayKhoiChieu: new Date(ngayKhoiChieu).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric' }),
+    ngayKhoiChieu: dateValue,
     danhGia,
   };
 }
 
-const rows = [
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-  createData(
-    1322,
-    "John Wick II",
-    "john-wick-ii",
-    "https://www.youtube.com/embed/XGk2EfbD_Ps",
-    "http://movie0706.cybersoft.edu.vn/hinhanh/john-wick-ii_gp09.jpeg",
-    "Mạng đổi mạng là một bộ phim hành động Mỹ sản xuất năm 2014, được đạo diễn bởi Chad Stahelski. Phim có sự tham gia của các diễn viên Keanu Reeves, Michael Nyqvist, Alfie Allen, Adrianne Palicki, Bridget Moynahan, Ian McShane, Willem Dafoe, John Leguizamo và Dean Winters",
-    "GP09",
-    "2021-08-28T20:55:10.05",
-    10
-  ),
-];
-
 function ManageMovies() {
   const [page, setPage] = React.useState(0);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchListMoviesAction());
+  }, [dispatch]);
+
+  const loading = useSelector((state) => state.ManageMoviesReducer.loading);
+  const listMovies = useSelector(
+    (state) => state.ManageMoviesReducer.listMovies
+  );
+
+  const keywords = useSelector((state) => state.ManageMoviesReducer.keywords);
+
+  let rows = [];
+  if (listMovies) {
+    listMovies.forEach((movie, index) => {
+      const {
+        maPhim,
+        tenPhim,
+        biDanh,
+        trailer,
+        hinhAnh,
+        moTa,
+        maNhom,
+        ngayKhoiChieu,
+        danhGia,
+      } = movie;
+      rows.push(
+        createData(
+          maPhim,
+          tenPhim,
+          biDanh,
+          trailer,
+          hinhAnh,
+          moTa,
+          maNhom,
+          ngayKhoiChieu,
+          danhGia
+        )
+      );
+    });
+  }
+
+  const rowsBackUp = [...rows]
+
+  if(keywords){
+    rows = rows.filter(movies => movies.tenPhim.toLowerCase().indexOf(keywords.toLowerCase()) !== -1 )
+  } else {
+    rows = rowsBackUp
+  }
+
   const tableBodyContent = rows
     .slice(page * 10, page * 10 + 10)
     .map((row, index) => (
       <TableRow key={index}>
         <TableCell style={{ width: 160, padding: 13 }}>{row.maPhim}</TableCell>
+        <TableCell style={{ width: 160, padding: 13 }}>{row.tenPhim}</TableCell>
         <TableCell style={{ width: 160, padding: 13 }}>
-          {row.tenPhim}
+          {row.ngayKhoiChieu}
         </TableCell>
-        <TableCell style={{ width: 160, padding: 13 }}>{row.ngayKhoiChieu}</TableCell>
         <TableCell style={{ width: 160, padding: 13 }}>{row.danhGia}</TableCell>
         <TableCell style={{ width: 80, padding: 13 }}>
-          <ModalEditMovie></ModalEditMovie>
-          <Button
-            variant="contained"
-            color="secondary"
-            startIcon={<DeleteIcon />}
-          ></Button>
+          <ModalEditMovie movieInfo={row}></ModalEditMovie>
+          <ModalDelete rowData={row}  pageSelected="Manage Movies"></ModalDelete>
         </TableCell>
       </TableRow>
     ));
+
+  if (loading) {
+    return <LoadingComponent></LoadingComponent>;
+  }
 
   return (
     <>

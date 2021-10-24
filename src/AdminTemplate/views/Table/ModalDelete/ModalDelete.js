@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ClearIcon from "@material-ui/icons/Clear";
 import { sendDeleteUserAction } from "../../ManageUsers/modules/actions";
+import { sendDeleteMovieAction } from "../../ManageMovies/modules/actions";
 
 function getModalStyle() {
   const top = 50;
@@ -42,7 +43,7 @@ const useStyleDeleteButton = makeStyles((theme) => ({
   },
 }));
 
-function ModalDeleteUser(props) {
+function ModalDelete(props) {
   const dispatch = useDispatch();
   const deleteButtonStyle = useStyleDeleteButton();
   const modalOpenStyle = useStylesModal();
@@ -120,7 +121,69 @@ function ModalDeleteUser(props) {
         )}
       </div>
     );
+  } else if (props.pageSelected === "Manage Movies") {
+    const ModalDeleteOnOpen = (rowData) => {
+      const modalDeleteUser = (
+        <div>
+          <div className="form-group">
+            <p>
+              Bạn có thực sự muốn xóa tài khoản: <b>{rowData.tenPhim}</b>?
+            </p>
+          </div>
+
+          <hr></hr>
+          <div className="d-flex justify-content-end">
+            <Button
+              variant="contained"
+              color="default"
+              startIcon={<ClearIcon></ClearIcon>}
+              onClick={() => handleClose()}
+              className="mr-2"
+            >
+              Hủy
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              className={deleteButtonStyle.button}
+              startIcon={<DeleteIcon></DeleteIcon>}
+              onClick={() => {
+                dispatch(sendDeleteMovieAction(rowData));
+                setOpen(false);
+              }}
+            >
+              Xóa
+            </Button>
+          </div>
+        </div>
+      );
+      return (
+        <div style={modalStyle} className={modalOpenStyle.paper}>
+          <div>
+            <h2 className="font-weight-bold text-uppercase">Xóa phim</h2>
+          </div>
+          <hr></hr>
+          <form>{modalDeleteUser}</form>
+        </div>
+      );
+    };
+    return (
+      <div className="d-inline-block mr-3">
+        <Button
+          variant="contained"
+          color="secondary"
+          className={deleteButtonStyle.button}
+          startIcon={<DeleteIcon></DeleteIcon>}
+          onClick={() => handleOpen()}
+        ></Button>
+        {open && (
+          <Modal open={open} onClose={() => handleClose()}>
+            {ModalDeleteOnOpen(props.rowData)}
+          </Modal>
+        )}
+      </div>
+    );
   }
 }
 
-export default ModalDeleteUser;
+export default ModalDelete;

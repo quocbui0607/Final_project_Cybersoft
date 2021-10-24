@@ -5,6 +5,7 @@ import { makeStyles, alpha } from "@material-ui/core/styles";
 import ModalAdd from "../ModalAdd/ModalAdd";
 import { useDispatch, useSelector } from "react-redux";
 import { sendKeyword } from "../../ManageUsers/modules/actions";
+import { sendKeywordMovies } from "../../ManageMovies/modules/actions";
 
 const useStyleSearchInput = makeStyles((theme) => ({
   search: {
@@ -54,12 +55,19 @@ const useStyleSearchInput = makeStyles((theme) => ({
 export default function ActionOnTable(props) {
   const inputSearchStyle = useStyleSearchInput();
   const dispatch = useDispatch();
-  const keywords = useSelector((state) => state.ManageUsersReducer.keywords);
-  const [valueKeywords,setKeywords] = useState(keywords);
+  const keywords = useSelector((state) => {
+    if (props.pageSelected === "Manage Users") {
+      return state.ManageUsersReducer.keywords;
+    } else if (props.pageSelected === "Manage Movies") {
+      return state.ManageMoviesReducer.keywords;
+    }
+  });
+
+  const [valueKeywords, setKeywords] = useState(keywords);
 
   useEffect(() => {
-    setKeywords(keywords)
-  }, [keywords])
+    setKeywords(keywords);
+  }, [keywords]);
 
   if (props.pageSelected === "Manage Users") {
     const handleSearchUser = (keywords) => {
@@ -91,5 +99,36 @@ export default function ActionOnTable(props) {
         </div>
       </div>
     );
-  } else return null;
+  } else
+   if (props.pageSelected === "Manage Movies") {
+    const handleSearchUser = (keywords) => {
+      dispatch(sendKeywordMovies(keywords));
+    };
+    return (
+      <div className="mb-4 d-flex align-items-center justify-content-between">
+        <div className={inputSearchStyle.search}>
+          <div className={inputSearchStyle.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Tìm kiếm theo tên phim"
+            classes={{
+              root: inputSearchStyle.inputRoot,
+              input: inputSearchStyle.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+            value={valueKeywords}
+            onChange={(e) => handleSearchUser(e.target.value)}
+          />
+        </div>
+        <div>
+          <ModalAdd
+            pageSelected={props.pageSelected}
+            rows={props.rows}
+            renderNoti={props.renderNoti()}
+          />
+        </div>
+      </div>
+    );
+  }
 }

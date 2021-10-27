@@ -1,0 +1,45 @@
+.movie-item {
+    margin-top: 80px;
+    .card {
+        padding: 0; 
+        background-color: var(--main-color); 
+        border: 1px solid red;
+        transition: all 0.5s ease;
+        margin-top: 40px;
+        &:hover {
+            box-shadow: 2px 2px 22px 3px rgba(255,0,0,1);
+            -webkit-box-shadow: 2px 2px 22px 3px rgba(255,0,0,1);
+            -moz-box-shadow: 2px 2px 22px 3px rgba(255,0,0,1);      
+        }   
+        .card-img-top {
+            height: 70vh;  
+            object-fit: fill;            
+        }
+         
+        .card-body {
+            .card-title {
+                color: #fff;
+                font-size: 24px;
+                font-weight: 500;
+                margin-bottom: 10px;                         
+            }   
+            .card-desc {
+                color: #fff;
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: column;
+                .date {
+                    margin-bottom: 15px;
+                }
+            } 
+            
+            .btn {
+                background-color: red;
+                color: #fff;
+                border: none;
+                margin-bottom: 20px;
+            }
+        }    
+       
+    }
+}

@@ -1,0 +1,119 @@
+.login { 
+    height: 100vh;    
+    .top {  
+        margin-bottom: 20px;                   
+        .container {            
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            .logo {    
+                color: red ;
+                font-weight: 900;
+                font-style: italic;
+                font-size: 35px;
+                border: solid 5px red;  
+                padding: 3px 20px 3px 10px;            
+                cursor: pointer;  
+            }           
+        }        
+    }
+
+    .container.bottom{
+        margin-top: 20px;                
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px;       
+        
+        form {
+            width: 40%;
+            height: 100%;
+            padding: 30px;
+            border-radius: 5px;
+            background-color: var(--main-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
+            .input {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 35px;
+                div {
+                    input {
+                        margin-right: 5px;                     
+                        width: 15px;
+                        height: 15px;   
+                        background-color: red;   
+                        color: red;                                                   
+                    }                    
+                }
+                span {
+                    cursor: pointer;
+                }
+            }
+                
+
+            .input-facebook {
+                margin-bottom: 5px;                
+                i {                        
+                    color: blue;
+                    background-color: #fff;
+                    margin-right: 5px;
+                    font-size: 16px;
+                    line-height: 16px;      
+                    padding: 0px;  
+                }   
+                span {
+                    cursor: pointer;
+                }             
+            }                 
+
+            h1,span,button {
+                margin-bottom: 20px;
+            }           
+
+            h1 {
+                text-align: center;
+            }
+
+            input {
+                border-radius: 5px;
+                padding: 10px;
+                background-color: grey;
+                color: #fff;
+                margin-bottom: 20px;
+                &::placeholder {
+                    color: lightgray;
+                }
+            }
+
+            button {
+                margin-top: 20px;
+                background-color: red;
+                border-radius: 5px;
+                color: #fff;
+                height: 40px;
+                border: none;
+                font-weight: 500;
+                font-size: 16px;
+                transition: all 0.5s;
+                &:hover {
+                    font-size: larger;
+                }                
+            }
+
+            span {
+                color: lightgray;                
+            }
+
+            b {
+            color: red;
+            cursor: pointer;
+            font-size: larger;
+            }
+        }
+    }
+}

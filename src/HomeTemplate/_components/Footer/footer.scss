@@ -1,0 +1,38 @@
+.footer {
+    background-color: #000;
+    padding-top: 80px;
+    padding-bottom: 300px;
+    .container {        
+        display: flex;
+        flex-direction: column;               
+        span {
+            margin-bottom: 20px;
+            color: grey;
+        }
+        .contactUs {
+            &:hover {
+                color: red;
+            }
+        }
+        .brand {           
+            color: red; 
+            cursor: pointer;                    
+        }
+        .contact {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            .box {
+                color: grey;
+                display: flex;
+                flex-direction: column; 
+                span {
+                    margin-bottom: 20px;
+                    &:hover {
+                        color: #fff;
+                        text-decoration: underline;
+                    }
+                }               
+            }
+        }   
+    }
+}

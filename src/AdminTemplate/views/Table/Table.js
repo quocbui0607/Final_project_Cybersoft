@@ -108,7 +108,13 @@ export default function CustomPaginationActionsTable(props) {
   const handleChangePage = (event, newPage) => {
     props.setPage(newPage);
   };
-  const error = useSelector((state) => state.ManageUsersReducer.error);
+  const error = useSelector((state) => {
+    if (props.pageSelected === "Manage Users") {
+      return state.ManageUsersReducer.error;
+    } else if (props.pageSelected === "Manage Movies") {
+      return state.ManageMoviesReducer.error;
+    }
+  });
 
   const renderNoti = () => {
     if (error) {

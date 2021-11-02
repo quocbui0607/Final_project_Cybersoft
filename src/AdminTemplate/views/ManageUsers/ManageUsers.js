@@ -6,7 +6,7 @@ import ModalEditUser from "./ModalEditUser/ModalEditUser";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchListUsersAction } from "./modules/actions";
 import LoadingComponent from "../../../common/LoadingComponent/LoadingComponent";
-import ModalDeleteUser from "../Table/ModalDelete/ModalDelete";
+import ModalDelete from "../Table/ModalDelete/ModalDelete";
 
 const manageUserTableHeader = (
   <TableRow>
@@ -87,10 +87,10 @@ function ManageUsers(props) {
           <div className='d-flex align-items-center justify-content-center'>
             <ModalEditUser userInfo={row}></ModalEditUser>
 
-            <ModalDeleteUser
+            <ModalDelete
               rowData={row}
               pageSelected="Manage Users"
-            ></ModalDeleteUser>
+            ></ModalDelete>
           </div>
         </TableCell>
       </TableRow>
@@ -99,6 +99,7 @@ function ManageUsers(props) {
   if (loading) {
     return <LoadingComponent></LoadingComponent>;
   }
+  
   return (
     <>
       <CustomPaginationActionsTable

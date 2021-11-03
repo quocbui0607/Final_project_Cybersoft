@@ -1,0 +1,45 @@
+.logo {
+  color: red;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 35px;
+  border: solid 5px red;
+  padding: 3px 20px 3px 10px;
+  text-decoration: none;
+}
+
+.navbar-toggler-icon {
+  color: #000 !important;
+}
+
+.navbar {
+  color: #fff;
+  background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
+  border: none !important;
+  position: fixed !important;
+  top: 0;
+  width: 100%;
+  z-index: 99;
+}
+
+.navbar .container .right .navbar-icon {
+  margin: 0px 15px;
+}
+
+.navbar .container .right .profile span {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.navbar .container .right .profile .options {
+  background-color: var(--main-color);
+  display: none;
+  border: 1px solid green;
+}
+
+.navbar .container .right .profile:hover .options {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+}
+/*# sourceMappingURL=navbar.css.map */

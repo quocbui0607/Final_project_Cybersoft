@@ -1,0 +1,93 @@
+.detailMovie {
+  padding-top: 120px;
+  background-color: var(--main-color);
+  .modalVideo {
+    width: 800px !important;
+    height: 600px !important;
+  }
+
+  .container {
+    .description {
+      border: 1px solid red;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 80px;
+      .movieDesc {
+        padding-right: 40px;
+        .table {
+          color: #fff;
+          text-align: justify;
+          tbody {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            .movie-title {
+              color: #fff;
+              font-weight: 700;
+              font-size: 40px;
+            }
+
+            .movie-rating {
+              display: flex;
+              justify-content: flex-start;
+              margin-top: 15px;
+              margin-bottom: 15px;
+              span {
+                margin-left: 15px;
+              }
+              .imdb,
+              .date {
+                background-color: grey;
+                color: black;
+                padding: 3px;
+                border-radius: 5px;
+                font-weight: 500;
+                cursor: pointer;
+              }
+            }
+
+            .movie-desc {
+              margin-bottom: 25px;
+            }
+
+            .movie-btn {
+              button {
+                width: 25%;
+                border: none;
+                border-radius: 5px;   
+                font-weight: 500;             
+              }
+              .play-btn {
+                background-color: #fff;
+                color: #000;
+                margin-right: 10px;
+                &:hover {
+                  background-color: red;
+                  color: #fff;
+                }
+              }
+              .add-btn {                
+                background-color: grey;   
+                &:hover {
+                  background-color: #fff;
+                  color: #000;
+                }             
+              } 
+            }
+          }
+        }
+      }
+
+      .moviePic {
+        box-shadow: -19px 2px 30px -9px rgba(255, 0, 0, 0.6);
+        -webkit-box-shadow: -19px 2px 30px -9px rgba(255, 0, 0, 0.6);
+        -moz-box-shadow: -19px 2px 30px -9px rgba(255, 0, 0, 0.6);
+        padding: 0;
+        img {
+          object-fit: fill;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

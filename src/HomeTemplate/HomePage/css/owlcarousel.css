@@ -1,0 +1,19 @@
+.owl-carousel {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.owl-nav {
+  display: none;
+}
+
+.owl-dots {
+  display: none;
+}
+
+.container-fluid .title {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+}
+/*# sourceMappingURL=owlcarousel.css.map */

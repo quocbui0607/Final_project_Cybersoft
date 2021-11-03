@@ -7,6 +7,10 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import "popper.js/dist/umd/popper.min.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "jquery/dist/jquery.min.js";
+import "owl.carousel/dist/assets/owl.carousel.css";  
+import "owl.carousel/dist/assets/owl.theme.default.css"; 
+import "video-react/dist/video-react.css";
+import 'react-modal-video/scss/modal-video.scss';
 
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";

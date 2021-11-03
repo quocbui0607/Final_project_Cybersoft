@@ -1,0 +1,66 @@
+.carousel {
+    // height: 100vh;
+    position: relative;
+    padding-bottom: 20px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .info {
+        width: 35%;
+        position: absolute;
+        left: 10%;
+        bottom: 30%;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .desc {
+            margin: 20px 0px;            
+        }
+
+        .buttons {
+            display: flex;
+
+            button {
+                width: 25%;
+                padding: 5px 25px 5px 20px;
+                margin-right: 15px;
+                border: none;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bolder;
+
+                span {
+                    margin-left: 2px;
+                }
+
+                &.play {
+                    background-color: #fff;
+                    // color: var(--main-color);
+                    &:hover {
+                        background-color: red;
+                        color: #fff;
+                    }
+                }
+
+                &.more {
+                    background-color: gray;
+                    &:hover {
+                        background-color: #fff;                        
+                    }
+                }
+            }
+        }
+    }       
+}

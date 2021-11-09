@@ -2,7 +2,7 @@
     height: 100vh;    
     .top {  
         margin-bottom: 20px;                   
-        .container {            
+        .custom-container {            
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -19,7 +19,7 @@
         }        
     }
 
-    .container.bottom{
+    .custom-bottom {
         margin-top: 20px;                
         color: #fff;
         display: flex;

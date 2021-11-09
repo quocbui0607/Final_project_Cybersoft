@@ -19,7 +19,7 @@ class ListMovie extends Component {
     render() {
         return (
             <div className="listMovie">                
-                <div class="box">
+                <div className="box">
                     <div className="row">
                         {this.renderListMovie()}
                     </div>

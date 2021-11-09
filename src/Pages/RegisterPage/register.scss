@@ -6,7 +6,7 @@
   //     url(img/netflix.jpg);
   .top {
     margin-bottom: 80px;
-    .container {
+    .custom-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -30,7 +30,7 @@
         font-weight: 500;
         transition: all 0.5s;
 
-        .nav-link {
+        .custom-nav-link{
           color: #fff;
         }
 
@@ -41,7 +41,7 @@
     }
   }
 
-  .container.bottom {
+  .custom-bottom {
     margin-top: 120px;
     color: #fff;
     display: flex;

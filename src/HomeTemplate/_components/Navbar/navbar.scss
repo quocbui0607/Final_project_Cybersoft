@@ -9,11 +9,11 @@
     // cursor: pointer;  
 }
 
-.navbar-toggler-icon {
+.custom-navbar-toggler-icon {
     color: #000 !important;
 }
 
-.navbar {
+.custom-navbar {
     color: #fff;
     // background: linear-gradient(to top, transparent 0%, rgba(0,0,0,0.3) 50%);
     background-color: var(--main-color);
@@ -23,14 +23,14 @@
     width: 100%;
     z-index: 99;   
 
-    .nav-link {
+    .custom-nav-link {
         color:#fff !important;
         font-weight: 500;
         &:hover {
             color: red !important;
         }
     }
-    .container {
+    .custom-container {
         .left {
 
         }

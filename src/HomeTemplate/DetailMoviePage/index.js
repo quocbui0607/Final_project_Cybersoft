@@ -19,11 +19,9 @@ class DetailMoviePage extends Component {
 
   openModal() {
     this.setState({isOpen: true})
-  }
-  // Chạy 1 lần duy nhất sau render
-  componentDidMount() {
-    // Nhận lại id từ url
-    // console.log(this.props);
+  }  
+
+  componentDidMount() {   
     const id = this.props.match.params.id;
     this.props.fetchDetailMovie(id);
   }  
@@ -58,7 +56,7 @@ class DetailMoviePage extends Component {
         theme="dark"             
         videoId={data && YoutubeParser(data?.trailer)} 
         onClose={() => this.setState({isOpen: false})}/>
-        <div className="container">         
+        <div className="container custom-container">         
           <div className="description row">            
             <div className="movieDesc col-md-6">
               <table className="table">
@@ -98,7 +96,7 @@ class DetailMoviePage extends Component {
                   </tr>
                 </thead>
                 {/* Lịch Chiếu */}
-                <tbody>{this.renderTable()}</tbody>
+                <tbody className="text-white">{this.renderTable()}</tbody>
               </table>
             </div>
           </div>

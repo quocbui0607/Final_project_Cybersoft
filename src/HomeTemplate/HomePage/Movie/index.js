@@ -1,46 +1,47 @@
 import "./movie.scss";
-import React, { useState } from "react";
+import React, { Component } from "react";
 import {
   PlayArrow,
   Add,
   ThumbUpAltOutlined,
   ThumbDownAltOutlined,
 } from "@material-ui/icons";
+// import ModalVideo from "react-modal-video";
+// import YoutubeParser from "../../../common/YoutubeIdParser";
 
 
-export default function Movie(index) {
-  const [isHovered, setIsHovered] = useState(false);
-  const trailer="https://player.vimeo.com/video/76979871?autoplay=1&loop=1&autopause=0";
-  // const trailer="https://vimeo.com/242433726";
-  return (    
-      <div className="movie" 
-      // style={{hover: isHovered && index * 1 }}
-      onMouseEnter={()=>setIsHovered(true)} 
-      onMouseLeave={()=>setIsHovered(false)}>
-        <img className="moviePic" src="./img/demo.jpg" alt="" />       
-        <video src="https://player.vimeo.com/video/76979871?autoplay=1&loop=1&autopause=0"
-          autoPlay={true}
-          loop
-          />      
-        {setIsHovered && (          
-          <>          
-          <div className="movieInfo">
-            <div className="icons">
-              <PlayArrow />
-              <Add />
-              <ThumbUpAltOutlined />
-              <ThumbDownAltOutlined />
-            </div>
-            <div className="movieInfoTop">
-              <span className="duration">1 hour 14 mins</span>
-              <span className="limit">+18</span>
-              <span className="year">2006</span>
-            </div>
-            <div className="desc">Lorem, ipsum dolor sit . aut, ipsum dicta</div>
-            <div className="genre">Action</div>
-          </div>
-          </>
-        )}
+export default class Movie extends Component {  
+  //  constructor () {
+  //   super()
+  //   this.state = {
+  //     isOpen: false
+  //   }
+  //   this.openModal = this.openModal.bind(this)
+  // }
+
+  // openModal() {
+  //   this.setState({isOpen: true})
+  // } 
+  render() {
+      const { movie } = this.props;
+      return (    
+      <div className="movie">
+        {/* <ModalVideo 
+        className="modal-video"
+        channel="youtube" 
+        isOpen={this.state.isOpen}         
+        controls={1}
+        theme="dark"             
+        videoId={movie && YoutubeParser(movie?.trailer)} 
+        onClose={() => this.setState({isOpen: false})}/> */}
+        <img className="moviePic" src={movie.hinhAnh} alt="" />                 
+        {/* <div className="moviePlay">          
+          <button className="play-btn" onClick={this.openModal}>
+            <PlayArrow />
+          </button>                      
+        </div>          */}
       </div>                   
   );
+  }
+  
 }

@@ -1,5 +1,6 @@
 import "./login.scss";
 import React, { useState, useRef } from 'react';
+import { NavLink } from "react-router-dom";
 
 
 export default function Login() {    
@@ -9,11 +10,13 @@ export default function Login() {
         backgroundImage: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%),url(img/netflix2.jpg)", 
         backgroundSize: "cover"}}>
             <div className="top">
-                <div className="container">
-                <span className="logo">HOMEFLIX</span>               
+                <div className="container custom-container">
+                <NavLink className="nav-link custom-nav-link" to="/">
+                    <span className="logo">HOMEFLIX</span>
+                </NavLink>                            
                 </div>               
             </div>
-            <div className="container bottom">
+            <div className="container custom-bottom">
                 <form>
                     <h1>Sign In</h1>
                     <input type="email" placeholder="Example@gmail.com"/>

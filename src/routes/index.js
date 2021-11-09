@@ -22,6 +22,11 @@ const routesHome = [
     exact: false,
     path: "/detail/:id",
     component: lazy(() => import("./../HomeTemplate/DetailMoviePage"))
+  },
+  {
+    exact: false,
+    path: "/booking",
+    component: lazy(() => import("./../HomeTemplate/BookingPage"))
   }
   
 ];

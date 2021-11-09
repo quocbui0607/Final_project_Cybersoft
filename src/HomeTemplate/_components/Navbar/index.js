@@ -6,7 +6,7 @@ import { Search, Notifications, ArrowDropDown } from "@material-ui/icons";
 export default class Navbar extends Component {  
   render() {    
     return (
-      <nav className="navbar navbar-expand-md">
+      <nav className="navbar custom-navbar navbar-expand-md">
         {/* Toggler/collapsibe Button */}
         <Link style={{ textDecoration: "none", marginLeft: "3%" }} to="/">
           <span className="logo">HOMEFLIX</span>
@@ -18,38 +18,23 @@ export default class Navbar extends Component {
           data-toggle="collapse"
           data-target="#collapsibleNavbar"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon custom-navbar-toggler-icon"></span>
         </button>
-        <div className="container">
+        <div className="container custom-container">
           <div className="left collapse navbar-collapse" id="collapsibleNavbar">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <NavLink exact className="nav-link" to="/">
+                <NavLink exact className="nav-link custom-nav-link" to="/">
                   Home
                 </NavLink>
-              </li>
+              </li>                          
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  About
+                <NavLink  to="/play-movie">
+                  Watch Demo
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Series
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/">
-                  Movies
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/play-movie">
-                  Watch
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/list-movie">
+                <NavLink className="nav-link custom-nav-link" to="/list-movie">
                   Movies List 
                 </NavLink>
               </li>
@@ -60,7 +45,7 @@ export default class Navbar extends Component {
             <input placeholder="Search..." />
             <Search className="navbar-icon" />
             <Notifications className="navbar-icon" />
-            <NavLink className="nav-link loginBtn" to="/register">
+            <NavLink className="nav-link custom-nav-link loginBtn" to="/register">
               Login 
             </NavLink>
             <div className="profile">

@@ -28,16 +28,19 @@ export default function Register() {
       }}
     >
       <div className="top">
-        <div className="container">
-          <span className="logo">HOMEFLIX</span>
+        <div className="container custom-container">
+          <NavLink className="nav-link custom-nav-link" to="/">
+            <span className="logo">HOMEFLIX</span>
+          </NavLink>
+          
           <button className="signIn-btn">
-            <NavLink className="nav-link" to="/login">
+            <NavLink className="nav-link custom-nav-link" to="/login">
               Sign In
             </NavLink>
           </button>
         </div>
       </div>
-      <div className="container bottom">
+      <div className="container custom-bottom">
         <h1>Unlimited movies, TV shows, and more</h1>
         <h2>Watch anywhere. Cancel anytime</h2>
         <p>
@@ -82,10 +85,10 @@ export default function Register() {
               <div className="video">
                 <video
                   src="./video-tv-0819.m4v"
-                  autoplay="true"
+                  autoPlay
                   playsInline=""
                   muted=""
-                  loop="true"
+                  loop
                 ></video>
               </div>
             </div>

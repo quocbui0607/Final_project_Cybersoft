@@ -4,8 +4,8 @@ import { Copyright } from "@material-ui/icons";
 
 export default class Footer extends Component {
   render() {
-    return <div className="footer">
-      <div className="container">        
+    return <div className="footer custom-footer">
+      <div className="container custom-container">        
         <span>More questions? <span className="contactUs">Contact us.</span></span>               
 
         <div className="contact">

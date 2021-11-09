@@ -3,6 +3,7 @@ import { InfoOutlined, PlayArrow } from "@material-ui/icons";
 import React, { Component } from "react";
 import ModalVideo from "react-modal-video";
 // import YoutubeParser from "../../../common/YoutubeIdParser";
+import OwlCarousel from "react-owl-carousel";
 
 export default class Carousel extends Component {
   constructor() {
@@ -27,9 +28,9 @@ export default class Carousel extends Component {
           theme="dark"          
           videoId="ndl1W4ltcmg"
           onClose={() => this.setState({ isOpen: false })}
-        />
-        {/* <h1>Carousel</h1> */}
-        <img
+        />    
+        
+            <img
           style={{ width: "100%" }}
           src="./img/thewitcherbanner.jpg"
           alt="carousel-cover"
@@ -53,7 +54,8 @@ export default class Carousel extends Component {
               <span>Info</span>
             </button>
           </div>
-        </div>
+        </div>               
+        
       </div>
     );
   }

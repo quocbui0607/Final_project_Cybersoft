@@ -1,22 +1,21 @@
 .movie {
-    cursor: pointer;    
-    // &:hover {
-    //     width: 120%;
-    //     height: 120%;
-    // }
-
+    cursor: pointer; 
+    position: relative; 
+   
     .moviePic {
       object-fit: cover;
+      height: 100vh;
     }
 
-    video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      // position: absolute;
-      // top: 0;
-      // left: 0;
-    }
+    // .moviePlay {
+    //   position: absolute;
+    //   top:50%;
+    //   left:50%;
+    //   .play-btn {
+    //     border: none;
+    //     background-color: white;
+    //   }
+    // }    
 }
 
     

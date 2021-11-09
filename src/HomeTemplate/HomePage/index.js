@@ -10,18 +10,7 @@ export default class HomePage extends Component {
       <div className="home">
         <Carousel/>
         <ListMovie/>
-        <ListMovie/>
-        {/* <div>
-          <List/>
-          <List/>
-        </div>               
-        <h3>HomePage</h3>
-        <h3>HomePage</h3>
-        <h3>HomePage</h3>
-        <h3>HomePage</h3>
-        <h3>HomePage</h3>
-        <h3>HomePage</h3>
-        <h3>HomePage</h3>         */}
+        <ListMovie/>       
       </div>
     );
   }

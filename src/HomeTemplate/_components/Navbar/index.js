@@ -29,7 +29,7 @@ export default class Navbar extends Component {
                 </NavLink>
               </li>                          
               <li className="nav-item">
-                <NavLink  to="/play-movie">
+                <NavLink className="nav-link custom-nav-link" to="/play-movie">
                   Watch Demo
                 </NavLink>
               </li>
